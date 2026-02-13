@@ -30,26 +30,26 @@ public class Auction {
     @JsonIgnoreProperties({"password", "otp", "otpGeneratedTime", "authorities", "username", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled"})
     private User highestBidder;
 
-    // --- ADDED: Winner Field (Fixes 'cannot find symbol setWinner') ---
+   
     @ManyToOne
     @JoinColumn(name = "winner_id")
     @JsonIgnoreProperties({"password", "otp", "otpGeneratedTime", "authorities", "username", "accountNonExpired", "accountNonLocked", "credentialsNonExpired", "enabled"})
     private User winner;
 
-    // --- ADDED: Bid List (Fixes 'cannot find symbol getBids') ---
+    
     @OneToMany(mappedBy = "auction", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("auction") // Prevents infinite recursion JSON error
+    @JsonIgnoreProperties("auction") 
     private List<Bid> bids;
 
     private Double startingPrice;
     private Double currentHighestBid;
     
-    // --- ADDED: Final Price (Optional but good for history) ---
+    
     private Double finalPrice;
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     
-    @Builder.Default // Ensures builder uses the default value
+    @Builder.Default 
     private boolean active = true;
 }
